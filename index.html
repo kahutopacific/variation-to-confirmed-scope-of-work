@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kahuto Pacific — Variation to Confirmed Scope of Works</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230e4a3a'/><text x='50%25' y='55%25' font-size='18' text-anchor='middle' dominant-baseline='middle' fill='%23d4a853' font-weight='bold'>K</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Fraunces:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    :root{
+      --g:#0e4a3a;--gl:#1a6b54;--gxl:#e8f0ed;
+      --gold:#d4a853;--gold-l:#faf3e0;
+      --bg:#f4f5f4;--white:#fff;
+      --tx:#1a1f1e;--tx-s:#4a5654;--tx-xs:#8a9593;
+      --bd:#dfe4e2;--bd-l:#eef1ef;
+      --r:10px;--rl:14px;
+      --sh:0 1px 3px rgba(14,74,58,.06);--shm:0 4px 16px rgba(14,74,58,.08);
+    }
+    body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);-webkit-font-smoothing:antialiased;line-height:1.5}
+    ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-thumb{background:#c5cac8;border-radius:3px}
+    button,input,select,textarea{font-family:inherit}
+    button{cursor:pointer;border:none;-webkit-tap-highlight-color:transparent}
+
+    .hdr{background:linear-gradient(145deg,#082e24,var(--g) 40%,var(--gl));position:relative;overflow:hidden}
+    .hdr::before{content:'';position:absolute;top:-40%;right:-15%;width:400px;height:400px;background:radial-gradient(circle,rgba(212,168,83,.1),transparent 70%);pointer-events:none}
+    .hdr-in{max-width:820px;margin:0 auto;padding:28px 24px 20px;position:relative;z-index:1}
+    .brand{font-size:10px;letter-spacing:4px;color:var(--gold);font-weight:700;text-transform:uppercase}
+    .hdr h1{font-family:'Fraunces',serif;font-weight:800;font-size:22px;color:#fff;margin:6px 0 0;letter-spacing:-.5px;line-height:1.3}
+    .hdr-sub{font-size:13px;color:rgba(255,255,255,.5);margin-top:4px}
+    .gold-rule{height:2px;background:linear-gradient(90deg,var(--gold),transparent);margin-top:16px;border-radius:1px}
+    .var-badge{display:inline-block;padding:4px 14px;border-radius:6px;font-size:11px;font-weight:700;letter-spacing:.5px;margin-top:10px;background:rgba(212,168,83,.2);color:var(--gold)}
+
+    .tabs{background:var(--white);border-bottom:1px solid var(--bd);padding:0 24px;overflow-x:auto}
+    .tabs-in{max-width:820px;margin:0 auto;display:flex}
+    .tab{padding:13px 14px;background:none;color:var(--tx-xs);font-weight:500;font-size:11px;white-space:nowrap;border-bottom:2.5px solid transparent;transition:.2s}
+    .tab:hover{color:var(--tx-s)}.tab.on{color:var(--g);font-weight:700;border-bottom-color:var(--g)}
+    .tab .n{display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;border-radius:50%;font-size:10px;font-weight:700;margin-right:5px;background:var(--bd-l);color:var(--tx-xs);transition:.2s}
+    .tab.on .n{background:var(--g);color:#fff}
+
+    .wrap{max-width:820px;margin:0 auto;padding:20px 24px 120px}
+
+    .card{background:var(--white);border:1px solid var(--bd);border-radius:var(--rl);padding:22px 26px;margin-bottom:16px;box-shadow:var(--sh)}
+    .ct{font-size:15px;font-weight:700;color:var(--g);display:flex;align-items:center;gap:10px;margin-bottom:16px;padding-bottom:11px;border-bottom:1px solid var(--bd-l)}
+    .ct .sn{font-family:'Fraunces',serif;font-weight:800;font-size:13px;color:var(--g);width:28px;height:28px;border-radius:50%;border:2px solid var(--g);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .ct .ic{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;background:var(--gxl);flex-shrink:0}
+
+    .fr{display:flex;flex-wrap:wrap;gap:14px}
+    .fd{flex:1 1 100%;min-width:0}.fd.h{flex:1 1 calc(50% - 7px);min-width:220px}.fd.t{flex:1 1 calc(33.33% - 10px);min-width:170px}
+    .fl{display:block;font-size:11px;font-weight:600;color:var(--tx-s);margin-bottom:4px;text-transform:uppercase;letter-spacing:.6px}
+    .fl .rq{color:#c53030;margin-left:2px}
+    .fd input,.fd select,.fd textarea{width:100%;padding:10px 14px;border:1.5px solid var(--bd);border-radius:var(--r);font-size:14px;background:#fafbfb;color:var(--tx);outline:0;transition:.15s}
+    .fd input:focus,.fd select:focus,.fd textarea:focus{border-color:var(--g);background:#fff;box-shadow:0 0 0 3px rgba(14,74,58,.08)}
+    .fd textarea{resize:vertical;min-height:56px}.fd input::placeholder,.fd textarea::placeholder{color:#b5bfbc}
+
+    .cg{display:flex;flex-wrap:wrap;gap:7px}
+    .ch{padding:7px 15px;border-radius:8px;font-size:13px;font-weight:500;border:1.5px solid var(--bd);background:var(--white);color:var(--tx-s);transition:.15s;user-select:none}
+    .ch:hover{border-color:#b8cdc5;background:#f8fbfa}
+    .ch.on{border-color:var(--g);background:var(--gxl);color:var(--g);font-weight:600}
+    .ch.on::before{content:'✓ ';font-weight:700}
+
+    .sl{font-size:11px;font-weight:700;color:var(--tx-xs);text-transform:uppercase;letter-spacing:.7px;margin:0 0 8px}
+    .hint{font-size:13px;color:var(--tx-s);margin-bottom:14px;line-height:1.6}
+    .hint b{color:var(--tx)}
+
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:var(--r);font-size:14px;font-weight:600;transition:.15s}
+    .btn-p{background:var(--g);color:#fff}.btn-p:hover{background:#0b3d30;box-shadow:var(--shm)}
+    .btn-gold{background:var(--gold);color:#fff}.btn-gold:hover{background:#c09930}
+    .btn-o{background:var(--white);color:var(--g);border:1.5px solid var(--g)}.btn-o:hover{background:var(--gxl)}
+    .btn-gh{background:transparent;color:var(--tx-s);border:1.5px solid var(--bd)}.btn-gh:hover{background:#f0f2f1}
+    .btn:disabled{opacity:.4;cursor:not-allowed}
+    .btn-lg{padding:14px 28px;font-size:15px;font-weight:700;border-radius:12px}
+
+    .fnav{position:fixed;bottom:0;left:0;right:0;background:var(--white);border-top:1px solid var(--bd);padding:12px 24px;z-index:50;box-shadow:0 -2px 10px rgba(0,0,0,.04)}
+    .fnav-in{max-width:820px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+
+    .ib{padding:14px 18px;border-radius:var(--r);font-size:13px;line-height:1.6}
+    .ib.gr{background:#edf5f1;border:1px solid #c8ddd3;color:var(--g)}
+    .ib.warn{background:#fefbeb;border:1px solid #e8d9a0;color:#92710c}
+
+    .toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);padding:12px 24px;border-radius:10px;font-size:13px;font-weight:600;z-index:100;box-shadow:0 8px 32px rgba(14,74,58,.15);animation:fu .3s}
+    .toast.ok{background:var(--g);color:#fff}.toast.err{background:#c53030;color:#fff}
+    @keyframes fu{from{opacity:0;transform:translateX(-50%) translateY(10px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+
+    /* Cost table */
+    .cost-table{width:100%;border-collapse:collapse;font-size:13px;margin:12px 0}
+    .cost-table th{text-align:left;padding:8px 10px;background:var(--gxl);color:var(--g);font-weight:700;font-size:10px;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid var(--g)}
+    .cost-table td{padding:4px 4px;border-bottom:1px solid var(--bd-l)}
+    .cost-table td input{padding:7px 10px;font-size:13px}
+    .cost-row-del{padding:6px 8px;border-radius:var(--r);background:none;border:1.5px solid var(--bd);color:var(--tx-xs);font-size:13px;transition:.15s}
+    .cost-row-del:hover{border-color:#c53030;color:#c53030;background:rgba(197,48,48,.04)}
+
+    /* Summary row */
+    .sum-row{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid var(--bd-l)}
+    .sum-row:last-child{border-bottom:none}
+    .sum-row.total{background:var(--gxl);border-radius:var(--r);border:1.5px solid var(--g);font-weight:700;color:var(--g);margin-top:4px}
+    .sum-label{font-size:13px;color:var(--tx-s)}
+    .sum-value{font-family:monospace;font-size:15px;font-weight:700;color:var(--tx)}
+    .sum-row.total .sum-label{color:var(--g)}
+    .sum-row.total .sum-value{color:var(--g);font-size:17px}
+
+    /* Radio-style toggle */
+    .radio-group{display:flex;gap:8px;flex-wrap:wrap}
+    .radio-btn{padding:10px 18px;border-radius:8px;font-size:13px;font-weight:500;border:1.5px solid var(--bd);background:var(--white);color:var(--tx-s);transition:.15s}
+    .radio-btn:hover{border-color:#b8cdc5;background:#f8fbfa}
+    .radio-btn.on{border-color:var(--g);background:var(--gxl);color:var(--g);font-weight:600}
+
+    /* Sig block */
+    .sig-block{flex:1;min-width:280px;padding:20px;background:#fafbfb;border:1.5px solid var(--bd);border-radius:var(--rl)}
+    .sig-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--tx-xs);margin-bottom:14px}
+    .sig-blank{text-align:center;padding:30px 16px;color:var(--tx-xs);border:2px dashed var(--bd);border-radius:var(--r)}
+
+    @media(max-width:640px){
+      .hdr-in{padding:22px 18px 16px}.hdr h1{font-size:18px}
+      .wrap{padding:16px 16px 120px}.card{padding:18px 18px}
+      .fd.h,.fd.t{flex:1 1 100%;min-width:0}.tab{padding:12px 6px;font-size:10px}
+      .tab .n{width:17px;height:17px;font-size:9px;margin-right:3px}
+      .sig-block{min-width:100%}
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
+
+  <script type="text/babel">
+    const{useState}=React;
+
+    // ═══════════════════════════════════════
+    //  OPTIONS
+    // ═══════════════════════════════════════
+    const STEPS=["Project Details","Variation Description","Impact & Cost","Schedule & Contract","Confirmation","Authorisation & Export"];
+
+    const REASONS=["Client request","Authority requirement","Unforeseen site condition","Incomplete or delayed documentation","Access restriction","Design change","Weather delay"];
+
+    const SCOPE_IMPACTS=["Field works","Processing","Deliverables","Schedule","AOI boundary","Mobilisation"];
+
+    // ═══════════════════════════════════════
+    //  PDF GENERATION
+    // ═══════════════════════════════════════
+    function generatePDF(d){
+      const today=new Date().toLocaleDateString('en-FJ',{year:'numeric',month:'long',day:'numeric'});
+      const esc=s=>(s||'').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+      const sec=(n,t)=>'<div style="font-size:13px;font-weight:800;color:#0e4a3a;border-bottom:2.5px solid #0e4a3a;padding-bottom:4px;margin:22px 0 10px;font-family:Fraunces,serif;">'+n+'. '+t+'</div>';
+      const row=(l,v)=>v?'<tr><td style="padding:6px 12px;font-weight:600;color:#4a5654;font-size:10.5px;width:220px;border-bottom:1px solid #eef1ef;vertical-align:top;">'+l+'</td><td style="padding:6px 12px;font-size:10.5px;border-bottom:1px solid #eef1ef;color:#1a1f1e;">'+v+'</td></tr>':'';
+      const chk=a=>(a||[]).map(i=>'<div style="padding:2px 0;font-size:10.5px;"><span style="color:#0e4a3a;font-weight:700;margin-right:6px;">☑</span>'+i+'</div>').join('');
+      const chip=items=>(items||[]).map(s=>'<span style="display:inline-block;padding:3px 10px;border-radius:5px;background:#e8f0ed;color:#0e4a3a;font-size:9.5px;font-weight:600;border:1px solid #c8ddd3;margin:2px 3px 2px 0;">'+s+'</span>').join('');
+      const note=v=>v?'<div style="background:#f4f5f4;border:1px solid #dfe4e2;border-radius:6px;padding:7px 12px;font-size:10px;color:#4a5654;margin-top:6px;">'+esc(v)+'</div>':'';
+      const fmtCurrency=v=>{const n=parseFloat(v);return isNaN(n)?'—':'FJD '+n.toLocaleString('en-FJ',{minimumFractionDigits:2,maximumFractionDigits:2});};
+
+      // Cost table rows
+      const costRows=(d.costItems||[]).filter(r=>r.item).map(r=>{
+        const qty=parseFloat(r.quantity)||0;const rate=parseFloat(r.rate)||0;const total=qty*rate;
+        return'<tr><td style="padding:5px 10px;border-bottom:1px solid #eef1ef;">'+esc(r.item)+'</td><td style="padding:5px 10px;text-align:right;border-bottom:1px solid #eef1ef;">'+fmtCurrency(r.rate)+'</td><td style="padding:5px 10px;text-align:center;border-bottom:1px solid #eef1ef;">'+esc(r.quantity)+'</td><td style="padding:5px 10px;text-align:right;font-weight:600;border-bottom:1px solid #eef1ef;">'+fmtCurrency(total.toString())+'</td></tr>';
+      }).join('');
+
+      const subtotal=parseFloat(d.subtotal)||0;
+      const vat=parseFloat(d.vat)||0;
+      const totalVar=subtotal+vat;
+
+      const html=`<!DOCTYPE html><html><head><meta charset="utf-8"><title>Variation ${esc(d.variationNumber)} - ${esc(d.projectName||'Form')}</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Fraunces:wght@700;800&display=swap" rel="stylesheet">
+<style>*{margin:0;padding:0;box-sizing:border-box;}body{font-family:'DM Sans',sans-serif;color:#1a1f1e;font-size:10.5px;line-height:1.55;background:#fff;}@page{size:A4;margin:14mm 18mm 16mm 18mm;}@media print{.no-print{display:none!important;}body{-webkit-print-color-adjust:exact;print-color-adjust:exact;}}table{width:100%;border-collapse:collapse;}</style></head><body style="padding:14mm 18mm;">
+
+<!-- Header -->
+<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;">
+<div>
+  <div style="font-size:9px;letter-spacing:4px;color:#d4a853;font-weight:700;text-transform:uppercase;">Kahuto Pacific Limited</div>
+  <div style="font-family:'Fraunces',serif;font-size:20px;font-weight:800;color:#0e4a3a;line-height:1.25;margin-top:4px;">Variation to Confirmed Scope of Works</div>
+</div>
+<div style="text-align:right;font-size:10px;color:#8a9593;line-height:1.7;">
+  ${d.variationNumber?'<div style="font-size:16px;font-weight:800;color:#b7791f;font-family:monospace;">'+esc(d.variationNumber)+'</div>':''}
+  ${d.projectCode?'<div style="font-size:12px;font-weight:700;color:#0e4a3a;font-family:monospace;">'+esc(d.projectCode)+'</div>':''}
+  <div>${today}</div>
+</div>
+</div>
+<div style="height:3px;background:linear-gradient(90deg,#d4a853 0%,#b7791f 30%,#0e4a3a 60%,#0e4a3a 100%);border-radius:2px;margin:8px 0 4px;"></div>
+
+<!-- 1. Project Details -->
+${sec(1,'Project Details')}
+<table>${row('Project Name',d.projectName)}${row('Project Code',d.projectCode)}${row('Client Company',d.clientCompany)}${row('Original Scope Confirmation Date',d.originalScopeDate)}${row('Original Proposal Reference',d.originalProposalRef)}${row('Variation Number',d.variationNumber)}${row('Date Issued',d.dateIssued)}</table>
+
+<!-- 2. Background -->
+${sec(2,'Background')}
+<div style="font-size:10.5px;color:#4a5654;line-height:1.7;">
+<p>This Variation relates to the previously signed:</p>
+<p style="font-weight:700;color:#0e4a3a;margin:4px 0;">"Project Scope Confirmation, AOI Verification &amp; Mobilisation Authorisation"</p>
+<p>dated: <b>${esc(d.originalScopeDate)||'___________________'}</b></p>
+<p style="margin-top:6px;">All terms and conditions of the original confirmed scope remain unchanged except as varied below.</p>
+</div>
+
+<!-- 3. Description of Variation -->
+${sec(3,'Description of Variation')}
+<div style="font-size:10.5px;color:#4a5654;line-height:1.7;white-space:pre-wrap;">${esc(d.variationDescription)}</div>
+
+<!-- 4. Reason for Variation -->
+${sec(4,'Reason for Variation')}
+<div style="margin:4px 0 8px;">${chip(d.reasons)}${d.reasonOther?chip([d.reasonOther]):''}</div>
+${d.reasonExplanation?note('Explanation: '+d.reasonExplanation):''}
+
+<!-- 5. Scope Impact -->
+${sec(5,'Scope Impact')}
+<div style="font-size:10.5px;color:#4a5654;margin-bottom:6px;">The following components of the original scope are affected:</div>
+<div style="margin:4px 0 8px;">${chip(d.scopeImpacts)}</div>
+${d.scopeImpactDetails?note(d.scopeImpactDetails):''}
+
+<!-- 6. Cost Impact -->
+${sec(6,'Cost Impact')}
+${costRows?`<table style="border:1px solid #dfe4e2;border-radius:6px;overflow:hidden;">
+<tr style="background:#e8f0ed;"><th style="padding:6px 10px;font-size:9px;text-transform:uppercase;letter-spacing:.5px;color:#0e4a3a;text-align:left;border-bottom:1.5px solid #0e4a3a;">Item</th><th style="padding:6px 10px;font-size:9px;text-transform:uppercase;letter-spacing:.5px;color:#0e4a3a;text-align:right;border-bottom:1.5px solid #0e4a3a;">Rate</th><th style="padding:6px 10px;font-size:9px;text-transform:uppercase;letter-spacing:.5px;color:#0e4a3a;text-align:center;border-bottom:1.5px solid #0e4a3a;">Qty</th><th style="padding:6px 10px;font-size:9px;text-transform:uppercase;letter-spacing:.5px;color:#0e4a3a;text-align:right;border-bottom:1.5px solid #0e4a3a;">Total (FJD)</th></tr>
+${costRows}
+</table>`:''}
+<table style="margin-top:10px;width:260px;margin-left:auto;">
+${row('Subtotal',fmtCurrency(d.subtotal))}
+${row('VAT (if applicable)',d.vat?fmtCurrency(d.vat):'—')}
+</table>
+<div style="margin-top:8px;margin-left:auto;width:260px;background:#e8f0ed;border:1.5px solid #0e4a3a;border-radius:6px;padding:8px 12px;display:flex;justify-content:space-between;align-items:center;">
+  <span style="font-weight:700;color:#0e4a3a;font-size:11px;">Total Variation Value</span>
+  <span style="font-family:monospace;font-weight:800;color:#0e4a3a;font-size:14px;">${fmtCurrency(totalVar.toString())}</span>
+</div>
+
+<!-- 7. Schedule Impact -->
+${sec(7,'Schedule Impact')}
+${d.scheduleImpact==='no_change'?
+  '<div style="padding:2px 0;font-size:10.5px;"><span style="color:#0e4a3a;font-weight:700;margin-right:6px;">☑</span>No change to agreed completion date</div>':
+  '<div style="padding:2px 0;font-size:10.5px;"><span style="color:#b7791f;font-weight:700;margin-right:6px;">☑</span>Extension of time required</div>'+
+  (d.revisedCompletionDate?'<div style="padding:4px 0;font-size:10.5px;"><b>Revised Completion Date:</b> '+esc(d.revisedCompletionDate)+'</div>':'')+
+  (d.additionalDays?'<div style="padding:4px 0;font-size:10.5px;"><b>Additional days:</b> '+esc(d.additionalDays)+'</div>':'')
+}
+
+<!-- 8. Revised Contract Value -->
+${sec(8,'Revised Contract Value')}
+<table>
+${row('Original Contract Value',d.originalContractValue?fmtCurrency(d.originalContractValue):'')}
+${row('Approved Variations to Date',d.approvedVariationsToDate?fmtCurrency(d.approvedVariationsToDate):'')}
+${row('This Variation',fmtCurrency(totalVar.toString()))}
+</table>
+${(d.originalContractValue||d.approvedVariationsToDate)?`<div style="margin-top:8px;background:#e8f0ed;border:1.5px solid #0e4a3a;border-radius:6px;padding:8px 12px;display:flex;justify-content:space-between;align-items:center;">
+  <span style="font-weight:700;color:#0e4a3a;font-size:11px;">Revised Total Contract Value</span>
+  <span style="font-family:monospace;font-weight:800;color:#0e4a3a;font-size:14px;">${fmtCurrency(((parseFloat(d.originalContractValue)||0)+(parseFloat(d.approvedVariationsToDate)||0)+totalVar).toString())}</span>
+</div>`:''}
+
+<!-- 9. Confirmation -->
+${sec(9,'Confirmation')}
+<div style="font-size:10.5px;color:#4a5654;margin-bottom:6px;">The Client acknowledges that:</div>
+<div style="padding:2px 0;font-size:10.5px;">• The works described above are outside the originally confirmed scope.</div>
+<div style="padding:2px 0;font-size:10.5px;">• The cost and time impact stated above are accepted.</div>
+<div style="padding:2px 0;font-size:10.5px;">• Kahuto Pacific will not commence the varied works until this document is signed.</div>
+
+<!-- 10. Authorisation -->
+${sec(10,'Authorisation')}
+<div style="display:flex;gap:40px;margin-top:16px;">
+  <div style="flex:1;">
+    <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#8a9593;margin-bottom:14px;">Client</div>
+    <table style="width:100%;">
+      <tr><td style="padding:4px 0;font-size:10px;color:#4a5654;width:80px;">Name:</td><td style="padding:4px 0;font-size:10.5px;border-bottom:1px solid #dfe4e2;min-height:20px;">&nbsp;</td></tr>
+      <tr><td style="padding:4px 0;font-size:10px;color:#4a5654;">Position:</td><td style="padding:4px 0;font-size:10.5px;border-bottom:1px solid #dfe4e2;">&nbsp;</td></tr>
+      <tr><td style="padding:4px 0;font-size:10px;color:#4a5654;">Company:</td><td style="padding:4px 0;font-size:10.5px;border-bottom:1px solid #dfe4e2;">&nbsp;</td></tr>
+      <tr><td style="padding:4px 0;font-size:10px;color:#4a5654;">Signature:</td><td style="padding:4px 0;border-bottom:1px solid #dfe4e2;height:36px;">&nbsp;</td></tr>
+      <tr><td style="padding:4px 0;font-size:10px;color:#4a5654;">Date:</td><td style="padding:4px 0;font-size:10.5px;border-bottom:1px solid #dfe4e2;">&nbsp;</td></tr>
+    </table>
+  </div>
+  <div style="flex:1;">
+    <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#8a9593;margin-bottom:14px;">Kahuto Pacific</div>
+    <table style="width:100%;">
+      <tr><td style="padding:4px 0;font-size:10px;color:#4a5654;width:80px;">Name:</td><td style="padding:4px 0;font-size:10.5px;font-weight:600;border-bottom:1px solid #dfe4e2;">${esc(d.kahutoName)}</td></tr>
+      <tr><td style="padding:4px 0;font-size:10px;color:#4a5654;">Position:</td><td style="padding:4px 0;font-size:10.5px;border-bottom:1px solid #dfe4e2;">${esc(d.kahutoPosition)}</td></tr>
+      <tr><td style="padding:4px 0;font-size:10px;color:#4a5654;">Signature:</td><td style="padding:4px 0;border-bottom:1px solid #dfe4e2;height:36px;">&nbsp;</td></tr>
+      <tr><td style="padding:4px 0;font-size:10px;color:#4a5654;">Date:</td><td style="padding:4px 0;font-size:10.5px;border-bottom:1px solid #dfe4e2;">${esc(d.kahutoDate)}</td></tr>
+    </table>
+  </div>
+</div>
+
+<div style="text-align:center;color:#b5bfbc;font-size:8.5px;margin-top:28px;padding-top:10px;border-top:1px solid #dfe4e2;">
+  Kahuto Pacific Limited &middot; Nadi, Fiji &middot; Variation to Confirmed Scope of Works &middot; ${esc(d.variationNumber)} &middot; ${today}
+</div>
+
+<div class="no-print" style="text-align:center;margin:36px 0;padding:24px;background:#f4f5f4;border-radius:12px;">
+  <p style="font-size:15px;color:#1a1f1e;font-weight:700;margin-bottom:6px;">Save as PDF</p>
+  <p style="font-size:12px;color:#8a9593;margin-bottom:16px;">Press <b>Ctrl+P</b> (or Cmd+P on Mac) → <b>"Save as PDF"</b></p>
+  <button onclick="window.print()" style="padding:14px 36px;border-radius:10px;border:none;background:#0e4a3a;color:#fff;font-weight:700;font-size:15px;cursor:pointer;font-family:'DM Sans',sans-serif;">Save as PDF</button>
+</div>
+
+</body></html>`;
+      const w=window.open('','_blank');if(w){w.document.write(html);w.document.close();}
+    }
+
+    // ═══════════════════════════════════════
+    //  UI COMPONENTS
+    // ═══════════════════════════════════════
+    function Card({title,icon,sn,children}){return <div className="card">{title&&<div className="ct">{sn?<div className="sn">{sn}</div>:<div className="ic">{icon}</div>}{title}</div>}{children}</div>}
+    function Fd({label,value,onChange,placeholder,type,half,third,required,prefix}){return <div className={"fd"+(half?" h":"")+(third?" t":"")}>
+      <label className="fl">{label}{required&&<span className="rq"> *</span>}</label>
+      <div style={prefix?{position:'relative'}:undefined}>
+        {prefix&&<span style={{position:'absolute',left:12,top:'50%',transform:'translateY(-50%)',fontSize:13,color:'var(--tx-xs)',fontWeight:600,pointerEvents:'none'}}>{prefix}</span>}
+        <input type={type||"text"} value={value||""} placeholder={placeholder||""} onChange={e=>onChange(e.target.value)} style={prefix?{paddingLeft:46}:undefined}/>
+      </div>
+    </div>}
+    function Ta({label,value,onChange,placeholder,rows}){return <div className="fd"><label className="fl">{label}</label><textarea value={value||""} placeholder={placeholder} rows={rows||3} onChange={e=>onChange(e.target.value)}/></div>}
+    function CG({items,selected,toggle}){return <div className="cg">{items.map(i=><button key={i} type="button" className={"ch"+(selected.includes(i)?" on":"")} onClick={()=>toggle(i)}>{i}</button>)}</div>}
+
+    // ═══════════════════════════════════════
+    //  MAIN APP
+    // ═══════════════════════════════════════
+    function App(){
+      const[step,setStep]=useState(0);
+      const[toast,setToast]=useState(null);
+      const show=(m,t)=>{setToast({m,t});setTimeout(()=>setToast(null),3000)};
+
+      const[f,setF]=useState({
+        projectName:'',projectCode:'',clientCompany:'',
+        originalScopeDate:'',originalProposalRef:'',variationNumber:'V01',dateIssued:'',
+        variationDescription:'',
+        reasons:[],reasonOther:'',reasonExplanation:'',
+        scopeImpacts:[],scopeImpactDetails:'',
+        costItems:[{item:'',rate:'',quantity:''},{item:'',rate:'',quantity:''}],
+        subtotal:'',vat:'',
+        scheduleImpact:'no_change',revisedCompletionDate:'',additionalDays:'',
+        originalContractValue:'',approvedVariationsToDate:'',
+        kahutoName:'',kahutoPosition:'',kahutoDate:'',
+      });
+
+      const s=(k,v)=>setF(p=>({...p,[k]:v}));
+      const tog=k=>item=>setF(p=>{const a=p[k]||[];return{...p,[k]:a.includes(item)?a.filter(x=>x!==item):[...a,item]};});
+
+      // Cost items management
+      const updateCostItem=(idx,field,val)=>setF(p=>{const items=[...p.costItems];items[idx]={...items[idx],[field]:val};return{...p,costItems:items};});
+      const addCostItem=()=>setF(p=>({...p,costItems:[...p.costItems,{item:'',rate:'',quantity:''}]}));
+      const removeCostItem=idx=>setF(p=>({...p,costItems:p.costItems.filter((_,i)=>i!==idx)}));
+
+      // Auto-calculate subtotal
+      const calcSubtotal=()=>{
+        let total=0;
+        f.costItems.forEach(r=>{const q=parseFloat(r.quantity)||0;const rate=parseFloat(r.rate)||0;total+=q*rate;});
+        return total;
+      };
+      const autoSubtotal=calcSubtotal();
+      const subtotalVal=f.subtotal?parseFloat(f.subtotal):autoSubtotal;
+      const vatVal=parseFloat(f.vat)||0;
+      const totalVariation=subtotalVal+vatVal;
+      const revisedContract=(parseFloat(f.originalContractValue)||0)+(parseFloat(f.approvedVariationsToDate)||0)+totalVariation;
+
+      const fmtCurrency=v=>{const n=parseFloat(v);return isNaN(n)||n===0?'—':'FJD '+n.toLocaleString('en-FJ',{minimumFractionDigits:2,maximumFractionDigits:2});};
+
+      const handleDownload=()=>{
+        if(!f.projectName){show('Please enter a Project Name','err');return;}
+        if(!f.variationNumber){show('Please enter a Variation Number','err');return;}
+        if(!f.kahutoName){show('Please fill in Kahuto representative details','err');return;}
+        // Use auto-subtotal if not manually set
+        const exportData={...f,subtotal:f.subtotal||autoSubtotal.toString()};
+        generatePDF(exportData);
+        show('PDF opened — Kahuto signed, client section left blank','ok');
+      };
+
+      const reset=()=>{setF({projectName:'',projectCode:'',clientCompany:'',originalScopeDate:'',originalProposalRef:'',variationNumber:'V01',dateIssued:'',variationDescription:'',reasons:[],reasonOther:'',reasonExplanation:'',scopeImpacts:[],scopeImpactDetails:'',costItems:[{item:'',rate:'',quantity:''},{item:'',rate:'',quantity:''}],subtotal:'',vat:'',scheduleImpact:'no_change',revisedCompletionDate:'',additionalDays:'',originalContractValue:'',approvedVariationsToDate:'',kahutoName:'',kahutoPosition:'',kahutoDate:''});setStep(0);show('Form reset','ok')};
+
+      const progress=((step+1)/STEPS.length)*100;
+
+      const sc=[
+        // 0: Project Details + Background
+        ()=><>
+          <Card title="Project Details" sn="1">
+            <div className="fr">
+              <Fd label="Project Name" value={f.projectName} onChange={v=>s('projectName',v)} placeholder="e.g. Kings Road Corridor Survey" half required/>
+              <Fd label="Project Code" value={f.projectCode} onChange={v=>s('projectCode',v)} placeholder="e.g. KP-2026-031" half/>
+              <Fd label="Client Company" value={f.clientCompany} onChange={v=>s('clientCompany',v)} placeholder="e.g. Fiji Roads Authority" half/>
+              <Fd label="Original Scope Confirmation Date" value={f.originalScopeDate} onChange={v=>s('originalScopeDate',v)} type="date" half/>
+              <Fd label="Original Proposal Reference (if applicable)" value={f.originalProposalRef} onChange={v=>s('originalProposalRef',v)} placeholder="e.g. PROP-2026-015" half/>
+              <Fd label="Variation Number" value={f.variationNumber} onChange={v=>s('variationNumber',v)} placeholder="e.g. V01, V02" half required/>
+              <Fd label="Date Issued" value={f.dateIssued} onChange={v=>s('dateIssued',v)} type="date" half/>
+            </div>
+          </Card>
+          <Card title="Background" sn="2">
+            <div className="hint">This Variation relates to the previously signed:</div>
+            <div className="ib gr" style={{marginBottom:12}}>
+              <div style={{fontWeight:700,color:'var(--g)'}}>"Project Scope Confirmation, AOI Verification & Mobilisation Authorisation"</div>
+              <div style={{marginTop:10}}>
+                <Fd label="Date of Original Scope Confirmation" value={f.originalScopeDate} onChange={v=>s('originalScopeDate',v)} type="date" required/>
+              </div>
+            </div>
+            <div className="hint">All terms and conditions of the original confirmed scope remain unchanged except as varied below.</div>
+          </Card>
+        </>,
+
+        // 1: Description of Variation + Reason
+        ()=><>
+          <Card title="Description of Variation" sn="3">
+            <p className="hint">Clearly describe the additional or amended works.</p>
+            <div className="ib" style={{background:'var(--gold-l)',border:'1px solid #e8d9a0',color:'#92710c',marginBottom:14,fontSize:12}}>
+              <div style={{fontWeight:700,marginBottom:4}}>Example formats:</div>
+              • Expansion of AOI boundary to include northern section beyond chainage 120<br/>
+              • Additional 1-day GPR scanning due to newly identified utility corridor<br/>
+              • Potholing required for QL-A verification<br/>
+              • Re-processing required following revised client design<br/>
+              • Additional deliverable: 0.1m contours instead of 0.5m
+            </div>
+            <Ta label="Detailed Description" value={f.variationDescription} onChange={v=>s('variationDescription',v)} placeholder="Describe the variation works in detail..." rows={6}/>
+          </Card>
+          <Card title="Reason for Variation" sn="4">
+            <p className="hint">Select all applicable reasons.</p>
+            <CG items={REASONS} selected={f.reasons} toggle={tog('reasons')}/>
+            <div style={{marginTop:16}}><Fd label="Other (specify)" value={f.reasonOther} onChange={v=>s('reasonOther',v)}/></div>
+            <div style={{marginTop:14}}><Ta label="Explanation" value={f.reasonExplanation} onChange={v=>s('reasonExplanation',v)} placeholder="Provide context for the variation..."/></div>
+          </Card>
+        </>,
+
+        // 2: Scope Impact + Cost Impact
+        ()=><>
+          <Card title="Scope Impact" sn="5">
+            <p className="hint">The following components of the original scope are affected:</p>
+            <CG items={SCOPE_IMPACTS} selected={f.scopeImpacts} toggle={tog('scopeImpacts')}/>
+            <div style={{marginTop:14}}><Ta label="Details" value={f.scopeImpactDetails} onChange={v=>s('scopeImpactDetails',v)} placeholder="Describe how the scope is affected..."/></div>
+          </Card>
+          <Card title="Cost Impact" sn="6">
+            <table className="cost-table">
+              <thead><tr><th>Item</th><th style={{width:130}}>Rate (FJD)</th><th style={{width:80}}>Qty</th><th style={{width:130}}>Total (FJD)</th><th style={{width:40}}></th></tr></thead>
+              <tbody>
+                {f.costItems.map((r,i)=>{
+                  const total=(parseFloat(r.quantity)||0)*(parseFloat(r.rate)||0);
+                  return <tr key={i}>
+                    <td><input value={r.item} onChange={e=>updateCostItem(i,'item',e.target.value)} placeholder="e.g. Additional GPR day"/></td>
+                    <td><input type="number" value={r.rate} onChange={e=>updateCostItem(i,'rate',e.target.value)} placeholder="0.00" style={{textAlign:'right'}}/></td>
+                    <td><input type="number" value={r.quantity} onChange={e=>updateCostItem(i,'quantity',e.target.value)} placeholder="1" style={{textAlign:'center'}}/></td>
+                    <td style={{padding:'4px 10px',fontFamily:'monospace',fontWeight:600,fontSize:14,textAlign:'right',color:total>0?'var(--tx)':'var(--tx-xs)'}}>{total>0?fmtCurrency(total.toString()):'—'}</td>
+                    <td>{f.costItems.length>1&&<button type="button" className="cost-row-del" onClick={()=>removeCostItem(i)}>✕</button>}</td>
+                  </tr>;
+                })}
+              </tbody>
+            </table>
+            <button type="button" className="btn btn-gh" style={{fontSize:12,padding:'8px 14px',marginTop:4}} onClick={addCostItem}>+ Add Line Item</button>
+
+            <div style={{marginTop:20,maxWidth:340,marginLeft:'auto'}}>
+              <div className="sum-row">
+                <span className="sum-label">Subtotal</span>
+                <span className="sum-value">{fmtCurrency(autoSubtotal.toString())}</span>
+              </div>
+              <div className="sum-row">
+                <div style={{flex:1}}><Fd label="VAT (if applicable)" value={f.vat} onChange={v=>s('vat',v)} placeholder="0.00" prefix="FJD"/></div>
+              </div>
+              <div className="sum-row total">
+                <span className="sum-label">Total Variation Value</span>
+                <span className="sum-value">{fmtCurrency(totalVariation.toString())}</span>
+              </div>
+            </div>
+          </Card>
+        </>,
+
+        // 3: Schedule Impact + Revised Contract Value
+        ()=><>
+          <Card title="Schedule Impact" sn="7">
+            <div className="radio-group" style={{marginBottom:16}}>
+              <button type="button" className={"radio-btn"+(f.scheduleImpact==='no_change'?' on':'')} onClick={()=>s('scheduleImpact','no_change')}>
+                {f.scheduleImpact==='no_change'&&'✓ '}No change to agreed completion date
+              </button>
+              <button type="button" className={"radio-btn"+(f.scheduleImpact==='extension'?' on':'')} onClick={()=>s('scheduleImpact','extension')}>
+                {f.scheduleImpact==='extension'&&'✓ '}Extension of time required
+              </button>
+            </div>
+            {f.scheduleImpact==='extension'&&<div className="fr">
+              <Fd label="Revised Completion Date" value={f.revisedCompletionDate} onChange={v=>s('revisedCompletionDate',v)} type="date" half/>
+              <Fd label="Number of Additional Days" value={f.additionalDays} onChange={v=>s('additionalDays',v)} placeholder="e.g. 3" half/>
+            </div>}
+          </Card>
+          <Card title="Revised Contract Value (Recommended)" sn="8">
+            <p className="hint">Track the cumulative contract value including all variations.</p>
+            <div className="fr">
+              <Fd label="Original Contract Value" value={f.originalContractValue} onChange={v=>s('originalContractValue',v)} placeholder="0.00" prefix="FJD" half/>
+              <Fd label="Approved Variations to Date" value={f.approvedVariationsToDate} onChange={v=>s('approvedVariationsToDate',v)} placeholder="0.00" prefix="FJD" half/>
+            </div>
+            <div style={{marginTop:16,maxWidth:400,marginLeft:'auto'}}>
+              <div className="sum-row">
+                <span className="sum-label">Original Contract</span>
+                <span className="sum-value">{fmtCurrency(f.originalContractValue)}</span>
+              </div>
+              <div className="sum-row">
+                <span className="sum-label">Previous Variations</span>
+                <span className="sum-value">{fmtCurrency(f.approvedVariationsToDate)}</span>
+              </div>
+              <div className="sum-row">
+                <span className="sum-label">This Variation</span>
+                <span className="sum-value">{fmtCurrency(totalVariation.toString())}</span>
+              </div>
+              <div className="sum-row total">
+                <span className="sum-label">Revised Total Contract Value</span>
+                <span className="sum-value">{fmtCurrency(revisedContract.toString())}</span>
+              </div>
+            </div>
+          </Card>
+        </>,
+
+        // 4: Confirmation
+        ()=><Card title="Confirmation" sn="9">
+          <p className="hint">The Client acknowledges that:</p>
+          {[
+            "The works described above are outside the originally confirmed scope.",
+            "The cost and time impact stated above are accepted.",
+            "Kahuto Pacific will not commence the varied works until this document is signed.",
+          ].map((a,i)=><div key={i} style={{padding:'12px 0',borderBottom:i<2?'1px solid var(--bd-l)':'none',fontSize:14,color:'var(--tx)'}}>• {a}</div>)}
+        </Card>,
+
+        // 5: Authorisation & Export
+        ()=><>
+          <Card title="Authorisation" sn="10">
+            <div style={{display:'flex',gap:20,flexWrap:'wrap'}}>
+              <div className="sig-block">
+                <div className="sig-label">Kahuto Pacific Representative</div>
+                <div className="fr">
+                  <Fd label="Name" value={f.kahutoName} onChange={v=>s('kahutoName',v)} placeholder="Full name" required/>
+                  <Fd label="Position" value={f.kahutoPosition} onChange={v=>s('kahutoPosition',v)} placeholder="e.g. Project Manager"/>
+                  <Fd label="Date" value={f.kahutoDate} onChange={v=>s('kahutoDate',v)} type="date"/>
+                </div>
+              </div>
+              <div className="sig-block">
+                <div className="sig-label">Client</div>
+                <div className="sig-blank">
+                  <div style={{fontSize:28,marginBottom:6}}>✍️</div>
+                  <div style={{fontSize:12}}>Client signature block left blank in PDF for wet signature or digital signing (Adobe Sign / DocuSign).</div>
+                </div>
+              </div>
+            </div>
+          </Card>
+          <Card title="Generate & Download" icon="📄">
+            <div className="ib gr" style={{marginBottom:18}}>
+              <div style={{fontWeight:700,marginBottom:4}}>Two-Stage Signing</div>
+              <div style={{fontSize:12.5}}>
+                <strong>1.</strong> Generate the PDF: Kahuto's details filled in, client section blank.<br/>
+                <strong>2.</strong> Email the PDF to the client for digital signing.<br/>
+                <strong>3.</strong> Variation works commence only after client signs and returns the document.
+              </div>
+            </div>
+
+            {/* Summary box */}
+            <div className="ib warn" style={{marginBottom:18}}>
+              <div style={{fontWeight:700,marginBottom:6}}>📋 Variation Summary</div>
+              <div style={{fontSize:12,display:'flex',flexWrap:'wrap',gap:16}}>
+                <div><strong>Variation:</strong> {f.variationNumber||'—'}</div>
+                <div><strong>Project:</strong> {f.projectName||'—'}</div>
+                <div><strong>Value:</strong> {fmtCurrency(totalVariation.toString())}</div>
+                <div><strong>Schedule:</strong> {f.scheduleImpact==='no_change'?'No change':'Extension required'}</div>
+              </div>
+            </div>
+
+            <button type="button" className="btn btn-p btn-lg" onClick={handleDownload} style={{width:'100%',justifyContent:'center'}}>📄  Generate Variation PDF</button>
+            <div style={{borderTop:'1px solid #eef1ef',marginTop:16,paddingTop:14}}>
+              <button type="button" className="btn btn-gh" onClick={reset}>🔄  Start New Variation</button>
+            </div>
+          </Card>
+        </>,
+      ];
+
+      return <div>
+        {toast&&<div className={"toast "+(toast.t==="ok"?"ok":"err")}>{toast.m}</div>}
+
+        <div className="hdr"><div className="hdr-in">
+          <div className="brand">Kahuto Pacific Limited</div>
+          <h1>Variation to Confirmed Scope of Works</h1>
+          <div className="hdr-sub">Step {step+1} of {STEPS.length} — {STEPS[step]}</div>
+          <div className="var-badge">⚠️ VARIATION — ADDITIONAL WORKS ARE CHARGEABLE</div>
+          <div className="gold-rule"/>
+        </div></div>
+
+        <div className="tabs"><div className="tabs-in">
+          {STEPS.map((l,i)=><button key={l} type="button" className={"tab"+(step===i?" on":"")} onClick={()=>setStep(i)}><span className="n">{i+1}</span>{l}</button>)}
+        </div></div>
+
+        <div className="wrap">{sc[step]()}</div>
+
+        <div className="fnav"><div className="fnav-in">
+          <button type="button" className="btn btn-gh" onClick={()=>setStep(Math.max(0,step-1))} disabled={step===0}>← Back</button>
+          <div style={{display:'flex',alignItems:'center',gap:8}}>
+            <span style={{fontSize:12,color:'#b5bfbc',fontWeight:500}}>{Math.round(progress)}% complete</span>
+            {step<STEPS.length-1&&<button type="button" className="btn btn-p" onClick={()=>setStep(step+1)}>Next →</button>}
+          </div>
+        </div></div>
+      </div>;
+    }
+
+    ReactDOM.render(<App/>,document.getElementById('root'));
+  </script>
+</body>
+</html>
