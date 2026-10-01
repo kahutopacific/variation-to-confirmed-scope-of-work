@@ -140,6 +140,8 @@
     // ═══════════════════════════════════════
     //  PDF GENERATION
     // ═══════════════════════════════════════
+    const qtyOf=r=>(r.quantity===''||r.quantity==null)?1:(parseFloat(r.quantity)||0);
+
     function generatePDF(d){
       const today=new Date().toLocaleDateString('en-FJ',{year:'numeric',month:'long',day:'numeric'});
       const esc=s=>(s||'').replace(/</g,'&lt;').replace(/>/g,'&gt;');
@@ -152,8 +154,8 @@
 
       // Cost table rows
       const costRows=(d.costItems||[]).filter(r=>r.item).map(r=>{
-        const qty=parseFloat(r.quantity)||0;const rate=parseFloat(r.rate)||0;const total=qty*rate;
-        return'<tr><td style="padding:5px 10px;border-bottom:1px solid #eef1ef;">'+esc(r.item)+'</td><td style="padding:5px 10px;text-align:right;border-bottom:1px solid #eef1ef;">'+fmtCurrency(r.rate)+'</td><td style="padding:5px 10px;text-align:center;border-bottom:1px solid #eef1ef;">'+esc(r.quantity)+'</td><td style="padding:5px 10px;text-align:right;font-weight:600;border-bottom:1px solid #eef1ef;">'+fmtCurrency(total.toString())+'</td></tr>';
+        const qty=qtyOf(r);const rate=parseFloat(r.rate)||0;const total=qty*rate;
+        return'<tr><td style="padding:5px 10px;border-bottom:1px solid #eef1ef;">'+esc(r.item)+'</td><td style="padding:5px 10px;text-align:right;border-bottom:1px solid #eef1ef;">'+fmtCurrency(r.rate)+'</td><td style="padding:5px 10px;text-align:center;border-bottom:1px solid #eef1ef;">'+qty+'</td><td style="padding:5px 10px;text-align:right;font-weight:600;border-bottom:1px solid #eef1ef;">'+fmtCurrency(total.toString())+'</td></tr>';
       }).join('');
 
       const subtotal=parseFloat(d.subtotal)||0;
@@ -213,8 +215,8 @@ ${costRows?`<table style="border:1px solid #dfe4e2;border-radius:6px;overflow:hi
 ${costRows}
 </table>`:''}
 <table style="margin-top:10px;width:260px;margin-left:auto;">
-${row('Subtotal',fmtCurrency(d.subtotal))}
-${row('VAT (if applicable)',d.vat?fmtCurrency(d.vat):'—')}
+<tr><td style="padding:6px 12px;font-weight:600;color:#4a5654;font-size:10.5px;border-bottom:1px solid #eef1ef;">Subtotal</td><td style="padding:6px 12px;font-size:10.5px;text-align:right;white-space:nowrap;border-bottom:1px solid #eef1ef;">${fmtCurrency(d.subtotal)}</td></tr>
+<tr><td style="padding:6px 12px;font-weight:600;color:#4a5654;font-size:10.5px;border-bottom:1px solid #eef1ef;">VAT (if applicable)</td><td style="padding:6px 12px;font-size:10.5px;text-align:right;white-space:nowrap;border-bottom:1px solid #eef1ef;">${d.vat?fmtCurrency(d.vat):'—'}</td></tr>
 </table>
 <div style="margin-top:8px;margin-left:auto;width:260px;background:#e8f0ed;border:1.5px solid #0e4a3a;border-radius:6px;padding:8px 12px;display:flex;justify-content:space-between;align-items:center;">
   <span style="font-weight:700;color:#0e4a3a;font-size:11px;">Total Variation Value</span>
@@ -333,7 +335,7 @@ ${sec(10,'Authorisation')}
       // Auto-calculate subtotal
       const calcSubtotal=()=>{
         let total=0;
-        f.costItems.forEach(r=>{const q=parseFloat(r.quantity)||0;const rate=parseFloat(r.rate)||0;total+=q*rate;});
+        f.costItems.forEach(r=>{total+=qtyOf(r)*(parseFloat(r.rate)||0);});
         return total;
       };
       const autoSubtotal=calcSubtotal();
@@ -418,7 +420,7 @@ ${sec(10,'Authorisation')}
               <thead><tr><th>Item</th><th style={{width:130}}>Rate (FJD)</th><th style={{width:80}}>Qty</th><th style={{width:130}}>Total (FJD)</th><th style={{width:40}}></th></tr></thead>
               <tbody>
                 {f.costItems.map((r,i)=>{
-                  const total=(parseFloat(r.quantity)||0)*(parseFloat(r.rate)||0);
+                  const total=qtyOf(r)*(parseFloat(r.rate)||0);
                   return <tr key={i}>
                     <td><input value={r.item} onChange={e=>updateCostItem(i,'item',e.target.value)} placeholder="e.g. Additional GPR day"/></td>
                     <td><input type="number" value={r.rate} onChange={e=>updateCostItem(i,'rate',e.target.value)} placeholder="0.00" style={{textAlign:'right'}}/></td>
