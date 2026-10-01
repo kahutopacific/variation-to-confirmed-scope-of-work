@@ -110,6 +110,14 @@
     .sig-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--tx-xs);margin-bottom:14px}
     .sig-blank{text-align:center;padding:30px 16px;color:var(--tx-xs);border:2px dashed var(--bd);border-radius:var(--r)}
 
+    /* Area map upload */
+    .map-zone{border:2px dashed var(--bd);border-radius:var(--r);padding:26px 16px;text-align:center;color:var(--tx-xs);font-size:13px;background:#fafbfb;cursor:pointer;transition:.15s}
+    .map-zone:hover,.map-zone.drag{border-color:var(--g);background:var(--gxl);color:var(--g)}
+    .map-prev{border:1.5px solid var(--bd);border-radius:var(--r);overflow:hidden;background:#fafbfb}
+    .map-prev img{display:block;width:100%;max-height:360px;object-fit:contain;background:#fff}
+    .map-prev-bar{display:flex;justify-content:flex-end;gap:8px;padding:8px;border-top:1px solid var(--bd-l)}
+    .map-slot{margin-top:16px}
+
     @media(max-width:640px){
       .hdr-in{padding:22px 18px 16px}.hdr h1{font-size:18px}
       .wrap{padding:16px 16px 120px}.card{padding:18px 18px}
@@ -142,6 +150,27 @@
     // ═══════════════════════════════════════
     const qtyOf=r=>(r.quantity===''||r.quantity==null)?1:(parseFloat(r.quantity)||0);
 
+    // Read an image file, shrink it to a print-friendly size, return a data URL
+    function readMapImage(file,cb){
+      if(!file||!file.type||!file.type.startsWith('image/'))return false;
+      const rd=new FileReader();
+      rd.onload=e=>{
+        const im=new Image();
+        im.onload=()=>{
+          const sc=Math.min(1,2200/Math.max(im.width,im.height));
+          const c=document.createElement('canvas');
+          c.width=Math.round(im.width*sc);c.height=Math.round(im.height*sc);
+          const ctx=c.getContext('2d');
+          ctx.fillStyle='#fff';ctx.fillRect(0,0,c.width,c.height);
+          ctx.drawImage(im,0,0,c.width,c.height);
+          cb(c.toDataURL('image/jpeg',0.9));
+        };
+        im.src=e.target.result;
+      };
+      rd.readAsDataURL(file);
+      return true;
+    }
+
     function generatePDF(d){
       const today=new Date().toLocaleDateString('en-FJ',{year:'numeric',month:'long',day:'numeric'});
       const esc=s=>(s||'').replace(/</g,'&lt;').replace(/>/g,'&gt;');
@@ -151,6 +180,15 @@
       const chip=items=>(items||[]).map(s=>'<span style="display:inline-block;padding:3px 10px;border-radius:5px;background:#e8f0ed;color:#0e4a3a;font-size:9.5px;font-weight:600;border:1px solid #c8ddd3;margin:2px 3px 2px 0;">'+s+'</span>').join('');
       const note=v=>v?'<div style="background:#f4f5f4;border:1px solid #dfe4e2;border-radius:6px;padding:7px 12px;font-size:10px;color:#4a5654;margin-top:6px;">'+esc(v)+'</div>':'';
       const fmtCurrency=v=>{const n=parseFloat(v);return isNaN(n)?'—':'FJD '+n.toLocaleString('en-FJ',{minimumFractionDigits:2,maximumFractionDigits:2});};
+
+      // Optional variation area map(s)
+      const mapFig=(title,img,caption,area)=>img?'<div style="page-break-inside:avoid;break-inside:avoid;margin-top:14px;">'
+        +'<div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#0e4a3a;margin-bottom:5px;">'+title+'</div>'
+        +'<img src="'+img+'" style="display:block;max-width:100%;max-height:165mm;margin:0 auto;border:1px solid #dfe4e2;border-radius:4px;"/>'
+        +((caption||area)?'<div style="font-size:9.5px;color:#4a5654;margin-top:5px;text-align:center;">'+esc(caption)+(caption&&area?' &middot; ':'')+(area?'<b>Area: '+esc(area)+'</b>':'')+'</div>':'')
+        +'</div>':'';
+      const hasMap=!!(d.includeMap&&d.mapRevised);
+      const mapSection=hasMap?mapFig('Variation Area Map',d.mapRevised,d.mapRevisedCaption,d.mapRevisedArea)+(d.mapOriginal?mapFig('Original Confirmed Area (for reference)',d.mapOriginal,d.mapOriginalCaption,d.mapOriginalArea):''):'';
 
       // Cost table rows
       const costRows=(d.costItems||[]).filter(r=>r.item).map(r=>{
@@ -196,6 +234,7 @@ ${sec(2,'Background')}
 <!-- 3. Description of Variation -->
 ${sec(3,'Description of Variation')}
 <div style="font-size:10.5px;color:#4a5654;line-height:1.7;white-space:pre-wrap;">${esc(d.variationDescription)}</div>
+${mapSection}
 
 <!-- 4. Reason for Variation -->
 ${sec(4,'Reason for Variation')}
@@ -214,6 +253,7 @@ ${costRows?`<table style="border:1px solid #dfe4e2;border-radius:6px;overflow:hi
 <tr style="background:#e8f0ed;"><th style="padding:6px 10px;font-size:9px;text-transform:uppercase;letter-spacing:.5px;color:#0e4a3a;text-align:left;border-bottom:1.5px solid #0e4a3a;">Item</th><th style="padding:6px 10px;font-size:9px;text-transform:uppercase;letter-spacing:.5px;color:#0e4a3a;text-align:right;border-bottom:1.5px solid #0e4a3a;">Rate</th><th style="padding:6px 10px;font-size:9px;text-transform:uppercase;letter-spacing:.5px;color:#0e4a3a;text-align:center;border-bottom:1.5px solid #0e4a3a;">Qty</th><th style="padding:6px 10px;font-size:9px;text-transform:uppercase;letter-spacing:.5px;color:#0e4a3a;text-align:right;border-bottom:1.5px solid #0e4a3a;">Total (FJD)</th></tr>
 ${costRows}
 </table>`:''}
+<div style="page-break-inside:avoid;break-inside:avoid;">
 <table style="margin-top:10px;width:260px;margin-left:auto;">
 <tr><td style="padding:6px 12px;font-weight:600;color:#4a5654;font-size:10.5px;border-bottom:1px solid #eef1ef;">Subtotal</td><td style="padding:6px 12px;font-size:10.5px;text-align:right;white-space:nowrap;border-bottom:1px solid #eef1ef;">${fmtCurrency(d.subtotal)}</td></tr>
 <tr><td style="padding:6px 12px;font-weight:600;color:#4a5654;font-size:10.5px;border-bottom:1px solid #eef1ef;">VAT (if applicable)</td><td style="padding:6px 12px;font-size:10.5px;text-align:right;white-space:nowrap;border-bottom:1px solid #eef1ef;">${d.vat?fmtCurrency(d.vat):'—'}</td></tr>
@@ -221,6 +261,7 @@ ${costRows}
 <div style="margin-top:8px;margin-left:auto;width:260px;background:#e8f0ed;border:1.5px solid #0e4a3a;border-radius:6px;padding:8px 12px;display:flex;justify-content:space-between;align-items:center;">
   <span style="font-weight:700;color:#0e4a3a;font-size:11px;">Total Variation Value</span>
   <span style="font-family:monospace;font-weight:800;color:#0e4a3a;font-size:14px;">${fmtCurrency(totalVar.toString())}</span>
+</div>
 </div>
 
 <!-- 7. Schedule Impact -->
@@ -250,6 +291,7 @@ ${sec(9,'Confirmation')}
 <div style="padding:2px 0;font-size:10.5px;">• The works described above are outside the originally confirmed scope.</div>
 <div style="padding:2px 0;font-size:10.5px;">• The cost and time impact stated above are accepted.</div>
 <div style="padding:2px 0;font-size:10.5px;">• Kahuto Pacific will not commence the varied works until this document is signed.</div>
+${hasMap?'<div style="padding:2px 0;font-size:10.5px;">• The area shown in the Variation Area Map (Section 3) is the agreed extent of the varied works.</div>':''}
 
 <!-- 10. Authorisation -->
 ${sec(10,'Authorisation')}
@@ -303,6 +345,35 @@ ${sec(10,'Authorisation')}
     function Ta({label,value,onChange,placeholder,rows}){return <div className="fd"><label className="fl">{label}</label><textarea value={value||""} placeholder={placeholder} rows={rows||3} onChange={e=>onChange(e.target.value)}/></div>}
     function CG({items,selected,toggle}){return <div className="cg">{items.map(i=><button key={i} type="button" className={"ch"+(selected.includes(i)?" on":"")} onClick={()=>toggle(i)}>{i}</button>)}</div>}
 
+    function MapSlot({title,img,caption,area,onImg,onCaption,onArea,onBad}){
+      const inp=React.useRef(null);
+      const[drag,setDrag]=useState(false);
+      const take=file=>{if(file&&!readMapImage(file,onImg))onBad();};
+      return <div className="map-slot">
+        <div className="sl">{title}</div>
+        <input ref={inp} type="file" accept="image/*" style={{display:'none'}} onChange={e=>{take(e.target.files[0]);e.target.value='';}}/>
+        {img?<div className="map-prev">
+          <img src={img} alt={title}/>
+          <div className="map-prev-bar">
+            <button type="button" className="btn btn-gh" style={{fontSize:12,padding:'6px 12px'}} onClick={()=>inp.current.click()}>Replace</button>
+            <button type="button" className="btn btn-gh" style={{fontSize:12,padding:'6px 12px'}} onClick={()=>onImg('')}>Remove</button>
+          </div>
+        </div>:<div className={"map-zone"+(drag?" drag":"")} onClick={()=>inp.current.click()}
+          onDragOver={e=>{e.preventDefault();setDrag(true);}} onDragLeave={()=>setDrag(false)}
+          onDrop={e=>{e.preventDefault();setDrag(false);take(e.dataTransfer.files[0]);}}>
+          <div style={{fontSize:24,marginBottom:4}}>🗺️</div>
+          <div><b>Click to choose</b> a map image, drag it here, or paste with Ctrl+V</div>
+          <div style={{fontSize:11,marginTop:4}}>PNG or JPG exported from QGIS / Google Earth</div>
+        </div>}
+        <div className="fr" style={{marginTop:10}}>
+          <Fd label="Caption" value={caption} onChange={onCaption} placeholder="e.g. Revised AOI incl. northern section" half/>
+          <Fd label="Area" value={area} onChange={onArea} placeholder="e.g. 12.4 ha" half/>
+        </div>
+      </div>;
+    }
+
+    const BLANK_MAP={includeMap:false,mapRevised:'',mapRevisedCaption:'',mapRevisedArea:'',mapOriginal:'',mapOriginalCaption:'',mapOriginalArea:''};
+
     // ═══════════════════════════════════════
     //  MAIN APP
     // ═══════════════════════════════════════
@@ -315,6 +386,7 @@ ${sec(10,'Authorisation')}
         projectName:'',projectCode:'',clientCompany:'',
         originalScopeDate:'',originalProposalRef:'',variationNumber:'V01',dateIssued:'',
         variationDescription:'',
+        ...BLANK_MAP,
         reasons:[],reasonOther:'',reasonExplanation:'',
         scopeImpacts:[],scopeImpactDetails:'',
         costItems:[{item:'',rate:'',quantity:''},{item:'',rate:'',quantity:''}],
@@ -326,6 +398,20 @@ ${sec(10,'Authorisation')}
 
       const s=(k,v)=>setF(p=>({...p,[k]:v}));
       const tog=k=>item=>setF(p=>{const a=p[k]||[];return{...p,[k]:a.includes(item)?a.filter(x=>x!==item):[...a,item]};});
+
+      // Paste a map image (Ctrl+V) while the area map option is switched on
+      React.useEffect(()=>{
+        if(!(f.includeMap&&step===1))return;
+        const onPaste=e=>{
+          const it=Array.from((e.clipboardData&&e.clipboardData.items)||[]).find(i=>i.type&&i.type.startsWith('image/'));
+          if(!it)return;
+          e.preventDefault();
+          readMapImage(it.getAsFile(),url=>setF(p=>p.mapRevised?{...p,mapOriginal:url}:{...p,mapRevised:url}));
+        };
+        document.addEventListener('paste',onPaste);
+        return()=>document.removeEventListener('paste',onPaste);
+      },[f.includeMap,step]);
+      const hasMap=!!(f.includeMap&&f.mapRevised);
 
       // Cost items management
       const updateCostItem=(idx,field,val)=>setF(p=>{const items=[...p.costItems];items[idx]={...items[idx],[field]:val};return{...p,costItems:items};});
@@ -350,13 +436,14 @@ ${sec(10,'Authorisation')}
         if(!f.projectName){show('Please enter a Project Name','err');return;}
         if(!f.variationNumber){show('Please enter a Variation Number','err');return;}
         if(!f.kahutoName){show('Please fill in Kahuto representative details','err');return;}
+        if(f.includeMap&&!f.mapRevised){setStep(1);show('Add the area map, or switch the area map option off','err');return;}
         // Use auto-subtotal if not manually set
         const exportData={...f,subtotal:f.subtotal||autoSubtotal.toString()};
         generatePDF(exportData);
         show('PDF opened — Kahuto signed, client section left blank','ok');
       };
 
-      const reset=()=>{setF({projectName:'',projectCode:'',clientCompany:'',originalScopeDate:'',originalProposalRef:'',variationNumber:'V01',dateIssued:'',variationDescription:'',reasons:[],reasonOther:'',reasonExplanation:'',scopeImpacts:[],scopeImpactDetails:'',costItems:[{item:'',rate:'',quantity:''},{item:'',rate:'',quantity:''}],subtotal:'',vat:'',scheduleImpact:'no_change',revisedCompletionDate:'',additionalDays:'',originalContractValue:'',approvedVariationsToDate:'',kahutoName:'',kahutoPosition:'',kahutoDate:''});setStep(0);show('Form reset','ok')};
+      const reset=()=>{setF({projectName:'',projectCode:'',clientCompany:'',originalScopeDate:'',originalProposalRef:'',variationNumber:'V01',dateIssued:'',variationDescription:'',...BLANK_MAP,reasons:[],reasonOther:'',reasonExplanation:'',scopeImpacts:[],scopeImpactDetails:'',costItems:[{item:'',rate:'',quantity:''},{item:'',rate:'',quantity:''}],subtotal:'',vat:'',scheduleImpact:'no_change',revisedCompletionDate:'',additionalDays:'',originalContractValue:'',approvedVariationsToDate:'',kahutoName:'',kahutoPosition:'',kahutoDate:''});setStep(0);show('Form reset','ok')};
 
       const progress=((step+1)/STEPS.length)*100;
 
@@ -399,6 +486,20 @@ ${sec(10,'Authorisation')}
               • Additional deliverable: 0.1m contours instead of 0.5m
             </div>
             <Ta label="Detailed Description" value={f.variationDescription} onChange={v=>s('variationDescription',v)} placeholder="Describe the variation works in detail..." rows={6}/>
+          </Card>
+          <Card title="Variation Area Map (Optional)" icon="🗺️">
+            <p className="hint">Only needed when the client asks for a map of the area to be covered. Leave off and the PDF prints without it.</p>
+            <div className="radio-group">
+              <button type="button" className={"radio-btn"+(!f.includeMap?' on':'')} onClick={()=>s('includeMap',false)}>{!f.includeMap&&'✓ '}No map</button>
+              <button type="button" className={"radio-btn"+(f.includeMap?' on':'')} onClick={()=>s('includeMap',true)}>{f.includeMap&&'✓ '}Include area map</button>
+            </div>
+            {f.includeMap&&<>
+              <MapSlot title="Variation area (revised)" img={f.mapRevised} caption={f.mapRevisedCaption} area={f.mapRevisedArea}
+                onImg={v=>s('mapRevised',v)} onCaption={v=>s('mapRevisedCaption',v)} onArea={v=>s('mapRevisedArea',v)} onBad={()=>show('Please choose an image file (PNG or JPG)','err')}/>
+              <MapSlot title="Original confirmed area — optional, for comparison" img={f.mapOriginal} caption={f.mapOriginalCaption} area={f.mapOriginalArea}
+                onImg={v=>s('mapOriginal',v)} onCaption={v=>s('mapOriginalCaption',v)} onArea={v=>s('mapOriginalArea',v)} onBad={()=>show('Please choose an image file (PNG or JPG)','err')}/>
+              <div className="ib warn" style={{marginTop:14,fontSize:12}}>The map prints under Section 3 of the PDF and adds a line to the Confirmation section making it the agreed extent of the varied works. Maps are not saved — re-attach them if the page is refreshed.</div>
+            </>}
           </Card>
           <Card title="Reason for Variation" sn="4">
             <p className="hint">Select all applicable reasons.</p>
@@ -499,7 +600,8 @@ ${sec(10,'Authorisation')}
             "The works described above are outside the originally confirmed scope.",
             "The cost and time impact stated above are accepted.",
             "Kahuto Pacific will not commence the varied works until this document is signed.",
-          ].map((a,i)=><div key={i} style={{padding:'12px 0',borderBottom:i<2?'1px solid var(--bd-l)':'none',fontSize:14,color:'var(--tx)'}}>• {a}</div>)}
+            ...(hasMap?["The area shown in the Variation Area Map (Section 3) is the agreed extent of the varied works."]:[]),
+          ].map((a,i,arr)=><div key={i} style={{padding:'12px 0',borderBottom:i<arr.length-1?'1px solid var(--bd-l)':'none',fontSize:14,color:'var(--tx)'}}>• {a}</div>)}
         </Card>,
 
         // 5: Authorisation & Export
@@ -541,6 +643,7 @@ ${sec(10,'Authorisation')}
                 <div><strong>Project:</strong> {f.projectName||'—'}</div>
                 <div><strong>Value:</strong> {fmtCurrency(totalVariation.toString())}</div>
                 <div><strong>Schedule:</strong> {f.scheduleImpact==='no_change'?'No change':'Extension required'}</div>
+                <div><strong>Area map:</strong> {hasMap?'Included':f.includeMap?'Switched on — no map added yet':'Not included'}</div>
               </div>
             </div>
 
